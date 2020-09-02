@@ -13,7 +13,7 @@ import org.springframework.stereotype.Service;
 import com.dstz.base.core.id.IdUtil;
 import com.dstz.base.core.util.StringUtil;
 import com.dstz.base.manager.impl.BaseManager;
-import com.dstz.org.core.dao.GroupDao;
+import com.dstz.org.core.noMappingDao.GroupDao;
 import com.dstz.org.core.dao.UserDao;
 import com.dstz.org.core.manager.GroupManager;
 import com.dstz.org.core.manager.OrgRelationManager;

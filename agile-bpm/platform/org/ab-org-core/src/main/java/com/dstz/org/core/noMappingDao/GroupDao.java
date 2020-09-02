@@ -1,11 +1,10 @@
-package com.dstz.org.core.dao;
+package com.dstz.org.core.noMappingDao;
 
 import com.dstz.base.dao.BaseDao;
 import com.dstz.org.core.model.Group;
+import org.mybatis.spring.annotation.MapperScan;
 
 import java.util.List;
-
-import org.mybatis.spring.annotation.MapperScan;
 
 
 /**
