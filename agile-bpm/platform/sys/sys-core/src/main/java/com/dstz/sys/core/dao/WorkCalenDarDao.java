@@ -2,6 +2,7 @@ package com.dstz.sys.core.dao;
 import java.util.Date;
 import java.util.List;
 
+import com.dstz.base.dao.annotation.MapperAnnotation;
 import org.apache.ibatis.annotations.Param;
 
 import com.dstz.base.dao.BaseDao;
@@ -10,6 +11,7 @@ import com.dstz.sys.api.model.calendar.WorkCalenDar;
 /**
  *  jeff 
  */
+@MapperAnnotation
 public interface WorkCalenDarDao extends BaseDao<String, WorkCalenDar> {
 
 	List<WorkCalenDar> getByDay(@Param("day")Date day);

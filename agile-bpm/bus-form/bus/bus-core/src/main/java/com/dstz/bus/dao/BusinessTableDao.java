@@ -1,5 +1,6 @@
 package com.dstz.bus.dao;
 
+import com.dstz.base.dao.annotation.MapperAnnotation;
 import org.mybatis.spring.annotation.MapperScan;
 
 import com.dstz.base.dao.BaseDao;
@@ -14,6 +15,6 @@ import com.dstz.bus.model.BusinessTable;
  * 版权：summer
  * </pre>
  */
-@MapperScan
+@MapperAnnotation
 public interface BusinessTableDao extends BaseDao<String, BusinessTable> {
 }

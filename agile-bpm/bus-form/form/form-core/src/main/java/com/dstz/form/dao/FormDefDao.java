@@ -3,6 +3,7 @@ package com.dstz.form.dao;
 import java.util.List;
 import java.util.Map;
 
+import com.dstz.base.dao.annotation.MapperAnnotation;
 import org.mybatis.spring.annotation.MapperScan;
 
 import com.dstz.base.api.query.QueryFilter;
@@ -16,7 +17,7 @@ import com.dstz.form.model.FormDef;
  * @email aschs@qq.com
  * @time 2018-03-19 20:30:46
  */
-@MapperScan
+@MapperAnnotation
 public interface FormDefDao extends BaseDao<String, FormDef> {
 
 	FormDef getByKey(String key);

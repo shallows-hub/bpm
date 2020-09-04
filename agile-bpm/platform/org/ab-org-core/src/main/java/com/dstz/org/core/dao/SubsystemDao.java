@@ -2,6 +2,7 @@ package com.dstz.org.core.dao;
 
 import java.util.List;
 
+import com.dstz.base.dao.annotation.MapperAnnotation;
 import org.mybatis.spring.annotation.MapperScan;
 
 import com.dstz.base.dao.BaseDao;
@@ -12,7 +13,7 @@ import com.dstz.org.core.model.Subsystem;
  * 描述：子系统定义 DAO接口
  * </pre>
  */
-@MapperScan
+@MapperAnnotation
 public interface SubsystemDao extends BaseDao<String, Subsystem> {
 
     /**

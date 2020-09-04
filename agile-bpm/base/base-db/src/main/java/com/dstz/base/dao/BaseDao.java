@@ -4,10 +4,12 @@ import java.io.Serializable;
 import java.util.List;
 
 import com.dstz.base.api.query.QueryFilter;
+import com.dstz.base.dao.annotation.MapperAnnotation;
 
 /**
  * 数据库访问基础类
  */
+@MapperAnnotation
 public interface BaseDao<PK extends Serializable, T> {
     /**
      * 创建实体对象

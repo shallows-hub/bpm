@@ -2,6 +2,7 @@ package com.dstz.org.core.dao;
 
 import java.util.List;
 
+import com.dstz.base.dao.annotation.MapperAnnotation;
 import org.apache.ibatis.annotations.Param;
 import org.mybatis.spring.annotation.MapperScan;
 
@@ -13,7 +14,7 @@ import com.dstz.org.core.model.ResRole;
  * 描述：角色资源分配 DAO接口
  * </pre>
  */
-@MapperScan
+@MapperAnnotation
 public interface ResRoleDao extends BaseDao<String, ResRole> {
 
     List<ResRole> getByRoleId(String roleId);

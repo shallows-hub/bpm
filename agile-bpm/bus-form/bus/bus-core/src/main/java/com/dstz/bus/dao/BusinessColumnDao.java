@@ -1,6 +1,7 @@
 package com.dstz.bus.dao;
 
 import com.dstz.base.dao.BaseDao;
+import com.dstz.base.dao.annotation.MapperAnnotation;
 import com.dstz.bus.model.BusinessColumn;
 
 import java.util.List;
@@ -16,7 +17,7 @@ import org.mybatis.spring.annotation.MapperScan;
  * 版权：summer
  * </pre>
  */
-@MapperScan
+@MapperAnnotation
 public interface BusinessColumnDao extends BaseDao<String, BusinessColumn> {
 
     /**

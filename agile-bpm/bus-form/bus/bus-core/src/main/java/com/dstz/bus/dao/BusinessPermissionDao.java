@@ -1,5 +1,6 @@
 package com.dstz.bus.dao;
 
+import com.dstz.base.dao.annotation.MapperAnnotation;
 import org.apache.ibatis.annotations.Param;
 import org.mybatis.spring.annotation.MapperScan;
 
@@ -13,7 +14,7 @@ import com.dstz.bus.model.BusinessPermission;
  * @email aschs@qq.com
  * @time 2018-04-25 19:00:07
  */
-@MapperScan
+@MapperAnnotation
 public interface BusinessPermissionDao extends BaseDao<String, BusinessPermission> {
 	BusinessPermission getByObjTypeAndObjVal(@Param("objType") String objType, @Param("objVal") String objVal);
 }

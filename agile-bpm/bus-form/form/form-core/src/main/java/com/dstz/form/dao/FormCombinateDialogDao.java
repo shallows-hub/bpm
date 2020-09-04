@@ -1,5 +1,6 @@
 package com.dstz.form.dao;
 
+import com.dstz.base.dao.annotation.MapperAnnotation;
 import org.mybatis.spring.annotation.MapperScan;
 
 import com.dstz.base.dao.BaseDao;
@@ -10,6 +11,6 @@ import com.dstz.form.model.FormCombinateDialog;
  * 描述：combinate_dialog DAO接口
  * </pre>
  */
-@MapperScan
+@MapperAnnotation
 public interface FormCombinateDialogDao extends BaseDao<String, FormCombinateDialog> {
 }

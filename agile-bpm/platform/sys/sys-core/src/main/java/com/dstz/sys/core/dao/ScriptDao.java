@@ -1,13 +1,14 @@
 package com.dstz.sys.core.dao;
 
 import com.dstz.base.dao.BaseDao;
+import com.dstz.base.dao.annotation.MapperAnnotation;
 import com.dstz.sys.core.model.Script;
 
 import java.util.List;
 
 import org.mybatis.spring.annotation.MapperScan;
 
-@MapperScan
+@MapperAnnotation
 public interface ScriptDao extends BaseDao<String, Script> {
 
     /**

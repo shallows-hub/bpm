@@ -1,4 +1,4 @@
-package com.dstz.org.core.noMappingDao;
+package com.dstz.org.core.dao;
 
 import com.dstz.base.dao.BaseDao;
 import com.dstz.org.core.model.Group;
@@ -12,7 +12,7 @@ import java.util.List;
  * 描述：组织架构 DAO接口
  * </pre>
  */
-@MapperScan 
+
 public interface GroupDao extends BaseDao<String, Group> {
     /**
      * 根据Code取定义对象。

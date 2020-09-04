@@ -1,5 +1,6 @@
 package com.dstz.sys.core.dao;
 import com.dstz.base.dao.BaseDao;
+import com.dstz.base.dao.annotation.MapperAnnotation;
 import com.dstz.sys.core.model.SysFile;
 
 /**
@@ -8,6 +9,7 @@ import com.dstz.sys.core.model.SysFile;
  * @email aschs@qq.com
  * @time 2018-06-07 23:54:49
  */
+@MapperAnnotation
 public interface SysFileDao extends BaseDao<String, SysFile> {
 
 }

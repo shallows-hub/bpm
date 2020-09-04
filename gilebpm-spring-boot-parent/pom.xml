@@ -14,6 +14,9 @@
 		<module>demo</module>
 		<!--  案例 前端代码 -->
 		<module>demo-project-ui</module>
+		<module>springboot-autoconfig</module>
+
+		<!--		<module>springboot-autoconfig</module>-->
 	</modules>
 	<packaging>pom</packaging>
 

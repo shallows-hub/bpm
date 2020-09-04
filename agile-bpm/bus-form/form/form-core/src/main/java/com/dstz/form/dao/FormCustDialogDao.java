@@ -1,6 +1,7 @@
 package com.dstz.form.dao;
 
 import com.dstz.base.dao.BaseDao;
+import com.dstz.base.dao.annotation.MapperAnnotation;
 import com.dstz.form.model.FormCustDialog;
 import org.mybatis.spring.annotation.MapperScan;
 
@@ -11,7 +12,7 @@ import org.mybatis.spring.annotation.MapperScan;
  * @email aschs@qq.com
  * @time 2018-01-18 19:30:51
  */
-@MapperScan
+@MapperAnnotation
 public interface FormCustDialogDao extends BaseDao<String, FormCustDialog> {
 
     /**

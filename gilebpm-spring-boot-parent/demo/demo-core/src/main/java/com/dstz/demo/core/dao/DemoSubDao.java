@@ -2,6 +2,7 @@ package com.dstz.demo.core.dao;
 import java.util.List;
 
 import com.dstz.base.dao.BaseDao;
+import com.dstz.base.dao.annotation.MapperAnnotation;
 import com.dstz.demo.core.model.DemoSub;
 
 /**
@@ -10,6 +11,7 @@ import com.dstz.demo.core.model.DemoSub;
  * @email aschs@qq.com
  * @time 2018-08-24 18:26:33
  */
+@MapperAnnotation
 public interface DemoSubDao extends BaseDao<String, DemoSub> {
 
 	List<DemoSub> getByFk(String fk);

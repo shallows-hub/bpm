@@ -1,6 +1,7 @@
 package com.dstz.sys.core.dao;
 
 import com.dstz.base.dao.BaseDao;
+import com.dstz.base.dao.annotation.MapperAnnotation;
 import com.dstz.sys.core.model.SysProperties;
 
 import java.util.List;
@@ -12,7 +13,7 @@ import org.mybatis.spring.annotation.MapperScan;
  * 描述：SYS_PROPERTIES DAO接口
  * </pre>
  */
-@MapperScan
+@MapperAnnotation
 public interface SysPropertiesDao extends BaseDao<String, SysProperties> {
 
     /**

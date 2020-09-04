@@ -1,5 +1,6 @@
 package com.dstz.form.dao;
 
+import com.dstz.base.dao.annotation.MapperAnnotation;
 import org.mybatis.spring.annotation.MapperScan;
 
 import com.dstz.base.dao.BaseDao;
@@ -12,7 +13,7 @@ import com.dstz.form.model.FormBusSet;
  * 邮箱:jeff@jee-soft.cn
  * </pre>
  */
-@MapperScan
+@MapperAnnotation
 public interface FormBusSetDao extends BaseDao<String, FormBusSet> {
 
     FormBusSet getByFormKey(String formKey);

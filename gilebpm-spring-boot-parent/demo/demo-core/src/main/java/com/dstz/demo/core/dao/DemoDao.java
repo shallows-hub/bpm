@@ -1,5 +1,6 @@
 package com.dstz.demo.core.dao;
 import com.dstz.base.dao.BaseDao;
+import com.dstz.base.dao.annotation.MapperAnnotation;
 import com.dstz.demo.core.model.Demo;
 
 /**
@@ -8,6 +9,7 @@ import com.dstz.demo.core.model.Demo;
  * @email aschs@qq.com
  * @time 2018-08-24 18:06:04
  */
+@MapperAnnotation
 public interface DemoDao extends BaseDao<String, Demo> {
 
 }

@@ -3,13 +3,14 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
+import com.dstz.base.dao.annotation.MapperAnnotation;
 import org.apache.ibatis.annotations.Param;
 
 import com.dstz.base.dao.BaseDao;
 import com.dstz.sys.api.model.calendar.Schedule;
 import com.dstz.sys.core.model.ParticipantScheduleDO;
 
-
+@MapperAnnotation
 public interface ScheduleDao extends BaseDao<String, Schedule> {
 	/**
 	 * 获取一段时间内的日程

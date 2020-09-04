@@ -2,6 +2,7 @@ package com.dstz.org.core.dao;
 
 import java.util.List;
 
+import com.dstz.base.dao.annotation.MapperAnnotation;
 import org.apache.ibatis.annotations.Param;
 import org.mybatis.spring.annotation.MapperScan;
 
@@ -13,7 +14,7 @@ import com.dstz.org.core.model.User;
  * 描述：用户表 DAO接口
  * </pre>
  */
-@MapperScan
+@MapperAnnotation
 public interface UserDao extends BaseDao<String, User> {
     /**
      * 根据Account取定义对象。

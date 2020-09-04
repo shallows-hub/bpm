@@ -1,5 +1,6 @@
 package com.dstz.sys.core.dao;
 
+import com.dstz.base.dao.annotation.MapperAnnotation;
 import org.mybatis.spring.annotation.MapperScan;
 
 import com.dstz.base.dao.BaseDao;
@@ -12,7 +13,7 @@ import com.dstz.sys.core.model.SysTreeNode;
  * @email aschs@qq.com
  * @time 2018-03-13 20:02:33
  */
-@MapperScan
+@MapperAnnotation
 public interface SysTreeNodeDao extends BaseDao<String, SysTreeNode> {
 
     /**

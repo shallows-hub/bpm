@@ -1,6 +1,7 @@
 package com.dstz.org.core.dao;
 
 import com.dstz.base.dao.BaseDao;
+import com.dstz.base.dao.annotation.MapperAnnotation;
 import com.dstz.org.core.model.Role;
 
 import java.util.List;
@@ -12,7 +13,7 @@ import org.mybatis.spring.annotation.MapperScan;
 /**
  * 描述：角色管理 DAO接口
  */
-@MapperScan
+@MapperAnnotation
 public interface RoleDao extends BaseDao<String, Role> {
     Role getByAlias(String alias);
     /**

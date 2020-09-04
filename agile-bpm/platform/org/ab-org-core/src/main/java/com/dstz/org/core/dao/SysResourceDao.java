@@ -2,6 +2,7 @@ package com.dstz.org.core.dao;
 
 import java.util.List;
 
+import com.dstz.base.dao.annotation.MapperAnnotation;
 import org.apache.ibatis.annotations.Param;
 import org.mybatis.spring.annotation.MapperScan;
 
@@ -13,7 +14,7 @@ import com.dstz.org.core.model.SysResource;
  * 描述：子系统资源 DAO接口
  * </pre>
  */
-@MapperScan
+@MapperAnnotation
 public interface SysResourceDao extends BaseDao<String, SysResource> {
     /**
      * 根据子系统ID取定义对象。

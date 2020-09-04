@@ -1,12 +1,13 @@
 package com.dstz.sys.core.dao;
 
+import com.dstz.base.dao.annotation.MapperAnnotation;
 import org.apache.ibatis.annotations.Param;
 import org.mybatis.spring.annotation.MapperScan;
 
 import com.dstz.base.dao.BaseDao;
 import com.dstz.sys.core.model.SerialNo;
 
-@MapperScan
+@MapperAnnotation
 public interface SerialNoDao extends BaseDao<String, SerialNo> {
 
 
