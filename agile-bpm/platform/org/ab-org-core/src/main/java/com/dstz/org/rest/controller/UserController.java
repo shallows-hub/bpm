@@ -5,6 +5,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
+import com.dstz.base.core.encrypt.NewEncryptUtil;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -72,11 +73,15 @@ public class UserController extends BaseController<User> {
         }
         
         User user = userManager.get(ContextUtil.getCurrentUserId());
-        if (!user.getPassword().equals(EncryptUtil.encryptSha256(oldPassWorld))) {
+//        if (!user.getPassword().equals(EncryptUtil.encryptSha256(oldPassWorld))) {
+//            throw new BusinessMessage("旧密码输入错误");
+//        }
+//        user.setPassword(EncryptUtil.encryptSha256(newPassword));
+        if (!NewEncryptUtil.authenticate(oldPassWorld, user.getPassword())) {
             throw new BusinessMessage("旧密码输入错误");
         }
 
-        user.setPassword(EncryptUtil.encryptSha256(newPassword));
+        user.setPassword(NewEncryptUtil.encrypt(newPassword));
         userManager.update(user);
         return getSuccessResult("更新密码成功");
 

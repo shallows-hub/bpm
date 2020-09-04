@@ -1,6 +1,7 @@
 package com.dstz.security.login;
 
 import com.dstz.base.core.encrypt.EncryptUtil;
+import com.dstz.base.core.encrypt.NewEncryptUtil;
 import com.dstz.base.core.util.AppUtil;
 import com.dstz.base.rest.util.RequestUtil;
 import org.apache.commons.codec.binary.Base64;
@@ -36,11 +37,11 @@ public class SecurityUtil {
      * @param username
      * @param enPassword
      */
-    public static void writeRememberMeCookie(HttpServletRequest request, HttpServletResponse response, String username, String password) {
+    public static void writeRememberMeCookie(HttpServletRequest request, HttpServletResponse response, String username, String password) throws Exception {
         String rememberMe = RequestUtil.getString(request, "rememberMe", "0");
         if (!"1".equals(rememberMe)) return;
 
-        String enPassword = EncryptUtil.encryptSha256(password);
+        String enPassword = NewEncryptUtil.encrypt(password);
 
         long tokenValiditySeconds = 1209600; // 14 days
         long tokenExpiryTime = System.currentTimeMillis() + (tokenValiditySeconds * 1000);

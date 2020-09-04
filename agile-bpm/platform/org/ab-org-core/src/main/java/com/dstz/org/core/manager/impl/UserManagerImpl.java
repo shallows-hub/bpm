@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
+import com.dstz.base.core.encrypt.NewEncryptUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -84,7 +85,11 @@ public class UserManagerImpl extends BaseManager<String, User> implements UserMa
 			if(StringUtil.isEmpty(user.getPassword())) {
 				user.setPassword("1");
 			}
-            user.setPassword(EncryptUtil.encryptSha256(user.getPassword()));
+			try{
+				user.setPassword(NewEncryptUtil.encrypt(user.getPassword()));
+			}catch (Exception e){
+				e.printStackTrace();
+			}
 			this.create(user);
 		}else {
 			this.update(user);

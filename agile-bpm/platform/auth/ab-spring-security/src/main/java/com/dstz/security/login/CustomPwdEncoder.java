@@ -1,5 +1,6 @@
 package com.dstz.security.login;
 
+import com.dstz.base.core.encrypt.NewEncryptUtil;
 import org.apache.commons.codec.binary.Base64;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
@@ -20,10 +21,12 @@ public class CustomPwdEncoder implements PasswordEncoder {
      */
     public String encode(CharSequence rawPassword) {
         String pwd = rawPassword.toString();
+
         try {
-            MessageDigest md = MessageDigest.getInstance("SHA-256");
-            byte[] digest = md.digest(pwd.getBytes("UTF-8"));
-            return new String(Base64.encodeBase64(digest));
+            return NewEncryptUtil.encrypt(pwd);
+//            MessageDigest md = MessageDigest.getInstance("SHA-256");
+//            byte[] digest = md.digest(pwd.getBytes("UTF-8"));
+//            return new String(Base64.encodeBase64(digest));
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -42,10 +45,15 @@ public class CustomPwdEncoder implements PasswordEncoder {
      */
     public boolean matches(CharSequence rawPassword, String encodedPassword) {
         if (ingorePwd.get() == null || ingorePwd.get() == false) {
-            String enc = this.encode(rawPassword);
-            return enc.equals(encodedPassword);
+//            String enc = this.encode(rawPassword);
+//            return enc.equals(encodedPassword);
+            try {
+                return NewEncryptUtil.authenticate(rawPassword.toString(), encodedPassword);
+            }catch (Exception e){
+                e.printStackTrace();
+                return false;
+            }
         }
         return true;
     }
-
 }

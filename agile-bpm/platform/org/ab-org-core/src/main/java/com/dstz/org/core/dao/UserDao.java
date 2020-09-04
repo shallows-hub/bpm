@@ -14,7 +14,7 @@ import com.dstz.org.core.model.User;
  * 描述：用户表 DAO接口
  * </pre>
  */
-@MapperAnnotation
+//@MapperAnnotation
 public interface UserDao extends BaseDao<String, User> {
     /**
      * 根据Account取定义对象。
