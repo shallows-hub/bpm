@@ -10,6 +10,7 @@ import java.lang.annotation.Target;
  * @Description TODO
  * @date 2020/9/4-11:52
  */
+//mybatis 注解，需要 mybatis 映射的必須加上這個注解
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
 public @interface MapperAnnotation {
