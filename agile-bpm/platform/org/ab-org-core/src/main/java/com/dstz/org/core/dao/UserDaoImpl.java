@@ -1,10 +1,8 @@
 package com.dstz.org.core.dao;
 
 import com.dstz.base.api.query.QueryFilter;
-import com.dstz.base.dao.OdooDao;
-import com.dstz.org.core.model.Group;
+import com.dstz.base.rest.util.OdooDao;
 import com.dstz.org.core.model.User;
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Component;
 
 import java.util.List;

@@ -1,12 +1,10 @@
 package com.dstz.base.rest.util;
 
-import org.apache.http.HttpEntity;
-import org.apache.http.HttpResponse;
-import org.apache.http.NameValuePair;
-import org.apache.http.ParseException;
+import org.apache.http.*;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpGet;
+import org.apache.http.client.methods.HttpHead;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
@@ -95,7 +93,7 @@ public class HttpClientUtil {
         HttpEntity httpEntity;
         try {
             httpEntity = new UrlEncodedFormEntity(pairs);
-            return httpPost(url, charset, timeout, httpEntity);
+            return httpPost(url, charset, timeout, httpEntity, "text/html");
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         }
@@ -128,7 +126,7 @@ public class HttpClientUtil {
         HttpEntity httpEntity = null;
         try {
             httpEntity = new StringEntity(jsonStr, charset);
-            return httpPost(url, charset, timeout, httpEntity);
+            return httpPost(url, charset, timeout, httpEntity, "text/html");
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -136,7 +134,7 @@ public class HttpClientUtil {
     }
 
     public static String httpPost(String url, HttpEntity httpEntity) {
-        return httpPost(url, "UTF-8", DEFAULT_TIME_OUT, httpEntity);
+        return httpPost(url, "UTF-8", DEFAULT_TIME_OUT, httpEntity,"text/html");
     }
 
     /**
@@ -148,7 +146,7 @@ public class HttpClientUtil {
      * @param httpEntity
      * @return
      */
-    public static String httpPost(String url, String charset, int timeout, HttpEntity httpEntity) {
+    public static String httpPost(String url, String charset, int timeout, HttpEntity httpEntity, String ContentType) {
         log.error("http url:" + url);
         if (url == null || url.equals("")) {
             return null;
@@ -164,6 +162,7 @@ public class HttpClientUtil {
             httpClient = new DefaultHttpClient(httpParams);
             httpPost = new HttpPost(url);
             httpPost.setEntity(httpEntity);
+            httpPost.addHeader("Content-Type", ContentType);
             httpResponse = httpClient.execute(httpPost);
             int statusCode = httpResponse.getStatusLine().getStatusCode();
             if (statusCode != 200) {

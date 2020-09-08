@@ -13,7 +13,7 @@ import com.dstz.org.core.model.OrgRelation;
  * @email for_office@qq.com
  * @time 2018-12-16 01:07:59
  */
-@MapperAnnotation
+//@MapperAnnotation
 public interface OrgRelationDao extends BaseDao<String, OrgRelation> {
 	
 	/**

@@ -13,7 +13,7 @@ import org.mybatis.spring.annotation.MapperScan;
 /**
  * 描述：角色管理 DAO接口
  */
-@MapperAnnotation
+//@MapperAnnotation
 public interface RoleDao extends BaseDao<String, Role> {
     Role getByAlias(String alias);
     /**

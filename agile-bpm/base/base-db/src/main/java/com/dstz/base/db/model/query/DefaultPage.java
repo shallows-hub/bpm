@@ -140,11 +140,11 @@ public class DefaultPage extends RowBounds implements Page, Serializable {
         return this.getOffset();
     }
 
-    @Override
-    public Integer getTotal() {
-        throw new RuntimeException("total not support");
-        // return this.getOffset();
-    }
+//    @Override
+//    public Integer getTotal() {
+//        throw new RuntimeException("total not support");
+//        // return this.getOffset();
+//    }
 
     public void setShowTotal(boolean isShowTotal) {
         this.isShowTotal = isShowTotal;
