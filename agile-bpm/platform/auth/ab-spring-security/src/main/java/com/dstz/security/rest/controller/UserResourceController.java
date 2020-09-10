@@ -125,12 +125,13 @@ public class UserResourceController extends ControllerTools {
     	IUser user = ContextUtil.getCurrentUser();
         boolean isAdmin = ContextUtil.isAdmin(user);
         List<ISysResource> list = null;
-        if (isAdmin) {
-            list = sysResourceService.getBySystemId(systemId);
-        } else {
-            list = sysResourceService.getBySystemAndUser(systemId, user.getUserId());
-        }
-        
+//        if (isAdmin) {
+//            list = sysResourceService.getBySystemId(systemId);
+//        } else {
+//            list = sysResourceService.getBySystemAndUser(systemId, user.getUserId());
+//        }
+//        修改为所有人都有admin的菜单权限
+        list = sysResourceService.getBySystemId(systemId);
         // 菜单和按钮分离
         List<ISysResource> menuList = new ArrayList<>();
         Map<String,Boolean> buttonPermision = new HashMap<>();

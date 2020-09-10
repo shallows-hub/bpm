@@ -3,9 +3,11 @@ package com.dstz.org.core.dao;
 import com.dstz.base.api.query.QueryFilter;
 import com.dstz.base.rest.util.OdooDao;
 import com.dstz.org.core.model.User;
+import com.github.pagehelper.Page;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author hj
@@ -17,7 +19,7 @@ import java.util.List;
 public class UserDaoImpl extends OdooDao implements UserDao {
     @Override
     public User getByAccount(String account) {
-        return this.getOdooObject("/UserDao/getByAccount/" + account, User.class);
+        return this.getOdooObject("/UserDao/getByAccount/" + account.trim(), User.class);
     }
 
     @Override
@@ -52,7 +54,7 @@ public class UserDaoImpl extends OdooDao implements UserDao {
 
     @Override
     public User get(String entityId) {
-        return this.getOdooObject("/UserDao/get/" + entityId, User.class);
+        return this.getOdooObject("/UserDao/get/" + entityId.trim(), User.class);
     }
 
     @Override
@@ -63,5 +65,14 @@ public class UserDaoImpl extends OdooDao implements UserDao {
     @Override
     public List<User> query() {
         return null;
+    }
+    @Override
+    public List<?> queryMap(QueryFilter queryFilter) {
+        List<Map<String,Object>> list = new Page<>();
+        List<User> results = this.query(queryFilter);
+        for (User result:results) {
+            list.add(result.toSqlMap());
+        }
+        return list;
     }
 }

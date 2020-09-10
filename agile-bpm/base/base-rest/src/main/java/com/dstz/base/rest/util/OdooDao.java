@@ -1,15 +1,17 @@
 package com.dstz.base.rest.util;
 
+import com.dstz.base.api.query.QueryFilter;
 import com.fasterxml.jackson.databind.JavaType;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.PropertyNamingStrategy;
 import com.github.pagehelper.Page;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
 
-@Component
-public class OdooDao {
+//@Component
+public abstract class OdooDao {
     @Autowired
     private OdooUtily odooUtily;
 
@@ -47,6 +49,7 @@ public class OdooDao {
         ObjectMapper objectMapper = new ObjectMapper();
         JavaType javaType = objectMapper.getTypeFactory().constructParametricType(Page.class, valueType);
         try {
+            objectMapper.setPropertyNamingStrategy(PropertyNamingStrategy.SNAKE_CASE);
             return (Page<T>) objectMapper.convertValue(object, javaType);
         }catch (Exception e){
             e.printStackTrace();
@@ -58,6 +61,8 @@ public class OdooDao {
             return null;
         }
         ObjectMapper objectMapper = new ObjectMapper();
+        objectMapper.setPropertyNamingStrategy(PropertyNamingStrategy.SNAKE_CASE);
         return objectMapper.convertValue(object, valueType);
     }
+    public abstract List<?> queryMap(QueryFilter queryFilter);
 }

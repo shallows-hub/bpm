@@ -1,7 +1,9 @@
 package com.dstz.org.core.model;
 
+import java.util.HashMap;
 import java.util.Map;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
 import com.dstz.base.core.model.BaseModel;
@@ -14,6 +16,7 @@ import com.dstz.org.api.model.IGroup;
  * 描述：角色管理 实体对象
  * </pre>
  */
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Role extends BaseModel implements IGroup {
     /**
      * 角色名称
@@ -129,4 +132,13 @@ public class Role extends BaseModel implements IGroup {
 	public String getGroupName() {
 		return this.name;
 	}
+
+    public Map<String, Object> toSqlMap(){
+        Map<String, Object> result = new HashMap<>();
+        result.put("name_", this.name);
+        result.put("alias_", this.alias);
+        result.put("id_", this.id);
+        result.put("description", this.description);
+        return result;
+    }
 }

@@ -74,7 +74,11 @@
                 <artifactId>org-api</artifactId>
                 <version>${platform.version}</version>
             </dependency>
-
+            <dependency>
+                <groupId>com.dstz.agilebpm</groupId>
+                <artifactId>ab-org-core</artifactId>
+                <version>${platform.version}</version>
+            </dependency>
             <dependency>
                 <groupId>com.dstz.agilebpm</groupId>
                 <artifactId>sys-api</artifactId>

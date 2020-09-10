@@ -2,11 +2,14 @@ package com.dstz.org.core.dao;
 
 import com.dstz.base.api.query.QueryFilter;
 import com.dstz.base.rest.util.OdooDao;
+import com.dstz.org.core.model.Group;
 import com.dstz.org.core.model.OrgRelation;
 import com.dstz.org.core.model.Role;
+import com.github.pagehelper.Page;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author hj
@@ -18,7 +21,10 @@ public class OrgRelationDaoImpl extends OdooDao implements OrgRelationDao {
 
     @Override
     public List<OrgRelation> getUserRelation(String userId, String relationType) {
-        return null;
+        if (relationType == null){
+            return  this.getOdooObjects("/OrgRelationDao/getUserRelation/"+ userId.trim(), OrgRelation.class);
+        }
+        return  this.getOdooObjects("/OrgRelationDao/getUserRelation/"+ userId.trim() + "/" + relationType.trim(), OrgRelation.class);
     }
 
     @Override
@@ -48,7 +54,8 @@ public class OrgRelationDaoImpl extends OdooDao implements OrgRelationDao {
 
     @Override
     public List<OrgRelation> getUserRole(String userId) {
-        return null;
+        List<OrgRelation> result=  this.getOdooObjects("/OrgRelationDao/getUserRole/"+ userId.trim(), OrgRelation.class);
+        return  result;
     }
 
     @Override
@@ -84,5 +91,15 @@ public class OrgRelationDaoImpl extends OdooDao implements OrgRelationDao {
     @Override
     public List<OrgRelation> query() {
         return null;
+    }
+
+    @Override
+    public List<?> queryMap(QueryFilter queryFilter) {
+        List<Map<String,Object>> list = new Page<>();
+        List<OrgRelation> results = this.query(queryFilter);
+        for (OrgRelation result:results) {
+            list.add(result.toSqlMap());
+        }
+        return list;
     }
 }

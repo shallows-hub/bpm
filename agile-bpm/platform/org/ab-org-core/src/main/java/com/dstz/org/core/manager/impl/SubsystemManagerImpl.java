@@ -62,11 +62,18 @@ public class SubsystemManagerImpl extends BaseManager<String, Subsystem> impleme
     @Override
     public List<Subsystem> getCuurentUserSystem() {
         IUser user = ContextUtil.getCurrentUser();
-        if (ContextUtil.isAdmin(user)) {
-            return subsystemDao.getList();
-        }
-
-        return subsystemDao.getSystemByUser(user.getUserId());
+//        List<Subsystem> resouces= subsystemDao.getList();
+//        for (Subsystem resouce :resouces ) {
+//            resouce.setId(user.getUserId());
+//        }
+//        修改为所有人都有admin的菜单权限
+        return subsystemDao.getList();
+//        IUser user = ContextUtil.getCurrentUser();
+//        if (ContextUtil.isAdmin(user)) {
+//            return subsystemDao.getList();
+//        }
+//
+//        return subsystemDao.getSystemByUser(user.getUserId());
     }
 
 	@Override

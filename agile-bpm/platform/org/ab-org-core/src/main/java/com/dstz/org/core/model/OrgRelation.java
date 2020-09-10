@@ -1,8 +1,11 @@
 package com.dstz.org.core.model;
 import java.util.Date;
 import java.math.BigDecimal;
+import java.util.HashMap;
+import java.util.Map;
 
 import com.dstz.base.core.model.BaseModel;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 
 /**
@@ -11,6 +14,7 @@ import com.dstz.base.core.model.BaseModel;
  * @email for_office@qq.com
  * @time 2018-12-16 01:07:59
  */
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class OrgRelation extends BaseModel{
 	/**
 	* 组ID
@@ -197,10 +201,13 @@ public class OrgRelation extends BaseModel{
 	public void setUserAccount(String userAccount) {
 		this.userAccount = userAccount;
 	}
-	
-	
-	
-	
-	
- 
+
+	public Map<String, Object> toSqlMap(){
+		Map<String, Object> result = new HashMap<>();
+		result.put("id", this.id);
+		result.put("group_id_", this.groupId);
+		result.put("user_id_", this.userId);
+		result.put("role_id_", this.roleId);
+		return result;
+	}
 }

@@ -1,9 +1,12 @@
 package com.dstz.org.core.model;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import com.dstz.base.core.model.BaseModel;
 import com.dstz.org.api.constant.GroupTypeConstant;
 import com.dstz.org.api.model.IGroup;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 
 /**
@@ -12,6 +15,7 @@ import com.dstz.org.api.model.IGroup;
  * @email for_office@qq.com
  * @time 2018-12-16 01:11:44
  */
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Group extends BaseModel implements IGroup{
 	/**
 	* 名字
@@ -192,5 +196,14 @@ public class Group extends BaseModel implements IGroup{
 	public String getGroupName() {
 		return this.name;
 	}
- 
+
+	public Map<String, Object> toSqlMap(){
+		Map<String, Object> result = new HashMap<>();
+		result.put("name_", this.name);
+		result.put("id_", this.id);
+		result.put("parent_id", this.parentId);
+		result.put("code_", this.code);
+		result.put("type_", this.type);
+		return result;
+	}
 }

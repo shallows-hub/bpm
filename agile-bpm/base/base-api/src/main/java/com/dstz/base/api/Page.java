@@ -23,7 +23,7 @@ public interface Page {
      *
      * @return
      */
-    public Integer getTotal();
+//    public Integer getTotal();
 
     /**
      * 返回总页码

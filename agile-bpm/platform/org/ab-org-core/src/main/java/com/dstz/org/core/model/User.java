@@ -1,8 +1,10 @@
 package com.dstz.org.core.model;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.hibernate.validator.constraints.NotBlank;
 
@@ -15,6 +17,7 @@ import com.dstz.org.api.model.IUser;
  * 描述：用户表 实体对象
  * </pre>
  */
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class User extends BaseModel implements IUser{
     /**
      * 姓名
@@ -291,6 +294,15 @@ public class User extends BaseModel implements IUser{
 
     public void setGroupId(String groupId) {
         this.groupId = groupId;
+    }
+
+
+    public Map<String, Object> toSqlMap(){
+        Map<String, Object> result = new HashMap<>();
+        result.put("fullname_", this.fullname);
+        result.put("account_", this.account);
+        result.put("status_", this.status);
+        return result;
     }
  
 }
