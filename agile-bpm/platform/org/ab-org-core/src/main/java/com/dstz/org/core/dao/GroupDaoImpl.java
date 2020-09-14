@@ -58,8 +58,8 @@ public class GroupDaoImpl extends OdooDao implements GroupDao {
     }
 
     @Override
-    public List<?> queryMap(QueryFilter queryFilter) {
-        List<Map<String,Object>> list = new Page<>();
+    public Page<?> queryMap(QueryFilter queryFilter) {
+        Page<Map<String,Object>> list = new Page<>();
         List<Group> results = this.query(queryFilter);
         for (Group result:results) {
             list.add(result.toSqlMap());

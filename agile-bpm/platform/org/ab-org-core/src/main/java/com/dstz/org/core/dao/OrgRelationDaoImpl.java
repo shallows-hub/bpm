@@ -85,7 +85,7 @@ public class OrgRelationDaoImpl extends OdooDao implements OrgRelationDao {
 
     @Override
     public List<OrgRelation> query(QueryFilter queryFilter) {
-        return this.postOdooObjects("/OrgRelationDao/query", queryFilter, OrgRelation.class);
+        return this.postOdooObjects("/OrgRelationDao/query", queryFilter, OrgRelation.class).toPage(queryFilter);
     }
 
     @Override
@@ -94,8 +94,8 @@ public class OrgRelationDaoImpl extends OdooDao implements OrgRelationDao {
     }
 
     @Override
-    public List<?> queryMap(QueryFilter queryFilter) {
-        List<Map<String,Object>> list = new Page<>();
+    public Page<?> queryMap(QueryFilter queryFilter) {
+        Page<Map<String,Object>> list = new Page<>();
         List<OrgRelation> results = this.query(queryFilter);
         for (OrgRelation result:results) {
             list.add(result.toSqlMap());

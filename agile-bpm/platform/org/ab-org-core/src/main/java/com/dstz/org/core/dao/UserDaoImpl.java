@@ -67,8 +67,8 @@ public class UserDaoImpl extends OdooDao implements UserDao {
         return null;
     }
     @Override
-    public List<?> queryMap(QueryFilter queryFilter) {
-        List<Map<String,Object>> list = new Page<>();
+    public Page<?> queryMap(QueryFilter queryFilter) {
+        Page<Map<String,Object>> list = new Page<>();
         List<User> results = this.query(queryFilter);
         for (User result:results) {
             list.add(result.toSqlMap());

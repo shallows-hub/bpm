@@ -13,7 +13,7 @@ import java.util.List;
 //@Component
 public abstract class OdooDao {
     @Autowired
-    private OdooUtily odooUtily;
+    protected OdooUtily odooUtily;
 
     public OdooUtily getOdooUtily() {
         return odooUtily;
@@ -28,21 +28,21 @@ public abstract class OdooDao {
         return mapperToObject(object, valueType);
 
     }
-    protected <T> List<T> getOdooObjects(String path, java.lang.Class<T> valueType){
+    protected <T> Page<T> getOdooObjects(String path, java.lang.Class<T> valueType){
         Object object = this.odooUtily.getObject(path);
-        return mapperToObjects(object, valueType);
+        return mapperToPageObjects(object, valueType);
     }
 
     protected int postOdooObject(String path,Object o) {
 //        return this.odooUtily.postOdooObject(path, o);
         return 0;
     }
-    protected <T> List<T> postOdooObjects(String path, Object requestObject, java.lang.Class<T> valueType){
+    protected <T> OdooDataWithPage<T> postOdooObjects(String path, Object requestObject, java.lang.Class<T> valueType){
         Object resultObject = this.odooUtily.postObjects(path, requestObject);
 //        postObjects
-        return mapperToObjects(resultObject, valueType);
+        return mapperToOdooDataWithPage(resultObject, valueType);
     }
-    private static  <T> List<T>  mapperToObjects(Object object, java.lang.Class<T> valueType){
+    private static  <T> Page<T>  mapperToPageObjects(Object object, java.lang.Class<T> valueType){
         if (null == object){
             return null;
         }
@@ -56,6 +56,20 @@ public abstract class OdooDao {
             return null;
         }
     }
+    private static  <T> OdooDataWithPage<T> mapperToOdooDataWithPage(Object object, java.lang.Class<T> valueType){
+        if (null == object){
+            return null;
+        }
+        ObjectMapper objectMapper = new ObjectMapper();
+        JavaType javaType = objectMapper.getTypeFactory().constructParametricType(OdooDataWithPage.class, valueType);
+        try {
+            objectMapper.setPropertyNamingStrategy(PropertyNamingStrategy.SNAKE_CASE);
+            return (OdooDataWithPage<T>) objectMapper.convertValue(object, javaType);
+        }catch (Exception e){
+            e.printStackTrace();
+            return null;
+        }
+    }
     private static <T> T  mapperToObject(Object object, java.lang.Class<T> valueType){
         if (null == object){
             return null;
@@ -64,5 +78,5 @@ public abstract class OdooDao {
         objectMapper.setPropertyNamingStrategy(PropertyNamingStrategy.SNAKE_CASE);
         return objectMapper.convertValue(object, valueType);
     }
-    public abstract List<?> queryMap(QueryFilter queryFilter);
+    public abstract Page<?> queryMap(QueryFilter queryFilter);
 }
