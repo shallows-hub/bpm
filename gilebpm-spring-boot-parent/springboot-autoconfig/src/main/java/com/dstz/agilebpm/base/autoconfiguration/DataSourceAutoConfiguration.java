@@ -24,7 +24,9 @@ import org.mybatis.spring.mapper.MapperScannerConfigurer;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceProperties;
+import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
+import org.springframework.boot.jdbc.DataSourceBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
@@ -46,15 +48,25 @@ public class DataSourceAutoConfiguration
         return dataSourceProperties.initializeDataSourceBuilder().type(DruidDataSource.class).build();
     }
 
+    @Bean(name="dataSource2")
+    @ConfigurationProperties(prefix = "spring.datasource2")
+    public DataSource dataSource2(){
+        return DataSourceBuilder.create().type(DruidDataSource.class).build();
+    }
+
     @Bean
-    public DynamicDataSource dataSource(DataSourceExtraProperties dataSourceExtraProperties, DataSource dataSourceDefault) {
+    public DynamicDataSource dataSource(DataSourceExtraProperties dataSourceExtraProperties, DataSource dataSourceDefault,@Qualifier("dataSource2") DataSource dataSource2) {
         DynamicDataSource dynamicDataSource = new DynamicDataSource();
         Map<Object, Object> targetDataSources = new HashMap<>(1);
         targetDataSources.put("dataSourceDefault", dataSourceDefault);
+        targetDataSources.put("dataSource2", dataSource2);
         dynamicDataSource.setTargetDataSources(targetDataSources);
         dynamicDataSource.setDefaultDbtype(dataSourceExtraProperties.getDbType());
+//        dynamicDataSource.addDataSource("dataSource2", dataSource2);
         return dynamicDataSource;
     }
+
+
 
     @Bean(name = { "jdbcTemplate" })
     public JdbcTemplate jdbcTemplate(@Qualifier("dataSource") final DataSource dataSource) {

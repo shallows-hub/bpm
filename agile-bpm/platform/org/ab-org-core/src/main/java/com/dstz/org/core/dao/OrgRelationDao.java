@@ -2,6 +2,7 @@ package com.dstz.org.core.dao;
 import java.util.List;
 
 import com.dstz.base.dao.annotation.MapperAnnotation;
+import com.dstz.base.dao.annotation.SecondMapperAnnotation;
 import org.apache.ibatis.annotations.Param;
 
 import com.dstz.base.dao.BaseDao;
@@ -13,6 +14,7 @@ import com.dstz.org.core.model.OrgRelation;
  * @email for_office@qq.com
  * @time 2018-12-16 01:07:59
  */
+@SecondMapperAnnotation
 //@MapperAnnotation
 public interface OrgRelationDao extends BaseDao<String, OrgRelation> {
 	

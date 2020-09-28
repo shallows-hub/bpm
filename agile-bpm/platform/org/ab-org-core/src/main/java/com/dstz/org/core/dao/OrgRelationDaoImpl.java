@@ -16,7 +16,7 @@ import java.util.Map;
  * @Description TODO
  * @date 2020/9/8-16:48
  */
-@Component
+//@Component
 public class OrgRelationDaoImpl extends OdooDao implements OrgRelationDao {
 
     @Override

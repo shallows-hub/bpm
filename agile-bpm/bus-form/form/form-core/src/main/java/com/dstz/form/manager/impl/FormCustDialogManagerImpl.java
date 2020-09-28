@@ -9,7 +9,6 @@ import java.util.Set;
 
 import javax.annotation.Resource;
 
-import com.dstz.form.util.FormDialogToDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
@@ -53,8 +52,8 @@ public class FormCustDialogManagerImpl extends BaseManager<String, FormCustDialo
     @Resource
     FormCustDialogDao formCustDialogDao;
 
-    @Autowired
-    FormDialogToDao formDialogToDao;
+//    @Autowired
+//    FormDialogToDao formDialogToDao;
     @Autowired
     ISysDataSourceService sysDataSourceService;
     @Autowired
@@ -116,10 +115,10 @@ public class FormCustDialogManagerImpl extends BaseManager<String, FormCustDialo
         	return getDataByInterface(formCustDialog,queryFilter);
         }
         List<?> list;
-        if (formDialogToDao.whetherToData(formCustDialog)){
-            list = formDialogToDao.data(formCustDialog, queryFilter);
-            return list;
-        }
+//        if (formDialogToDao.whetherToData(formCustDialog)){
+//            list = formDialogToDao.data(formCustDialog, queryFilter);
+//            return list;
+//        }
         boolean isPage = (boolean) ThreadMapUtil.getOrDefault("isPage", true);
         if (isPage) {
             list = commonDao.queryForListPage(sql, queryFilter);

@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 import java.util.Map;
 
-@Component
+//@Component
 public class GroupDaoImpl extends OdooDao implements GroupDao {
     public Group getByCode(String code){
         return this.getOdooObject("/GroupDao/getByCode/"+ code.trim(), Group.class);

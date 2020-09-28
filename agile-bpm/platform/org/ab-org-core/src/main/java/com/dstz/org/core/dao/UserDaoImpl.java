@@ -15,7 +15,7 @@ import java.util.Map;
  * @date 2020/9/4-14:25
  */
 
-@Component
+//@Component
 public class UserDaoImpl extends OdooDao implements UserDao {
     @Override
     public User getByAccount(String account) {

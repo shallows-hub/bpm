@@ -19,7 +19,7 @@ import java.util.Map;
  * @date 2020/9/7-16:34
  */
 
-@Component
+//@Component
 public class RoleDaoImpl extends OdooDao implements RoleDao {
     @Override
     public Role getByAlias(String alias) {
