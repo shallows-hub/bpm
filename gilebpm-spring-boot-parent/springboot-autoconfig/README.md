@@ -17,8 +17,9 @@ spring:
 >对于Dao层，如果某些Dao层需要通过数据源2读取数据，需在interface添加 @SecondMapperAnnotation  
 
 1-2 原理  
-原系统有dynamic data source 逻辑，这逻辑会在wf模块读取数据时先在default
- data source 读取 form_cust_dialog 数据，根据ds_key来切换数据源，然后
- 通过baseDao来查询。但dynamic data source逻辑在编写Aspect切换UserDao时失败，
- 暂时通过配置多一个mybatis配置来解决，采用第二个配置的可添加 @SecondMapperAnnotation，
+原系统有dynamic data source(动态数据源) 逻辑，这逻辑会在wf模块读取数据时先在default  
+ data source 读取 form_cust_dialog 数据，根据ds_key来切换数据源，然后  
+ 通过baseDao来查询。 其他Dao层采用默认数据源，原代码没有提供切换方案。  
+ 但dynamic data source逻辑在编写Aspect切换UserDao等普通Dao层的数据源时失败，  
+ 暂时通过配置多一个mybatis配置来解决，采用第二个数据源配置的可添加 @SecondMapperAnnotation，  
  原数据源的采用 @MapperAnnotation 
