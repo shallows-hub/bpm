@@ -17,7 +17,7 @@ public enum ColumnType {
 	/**
 	 * 字符串
 	 */
-	VARCHAR("varchar", "字符串", new String[] { "varchar", "varchar2", "char", "tinyblob", "tinytext" }),
+	VARCHAR("varchar", "字符串", new String[] { "varchar", "varchar2", "char", "tinyblob", "tinytext", "character varying" }),
 	/**
 	 * 大文本
 	 */
@@ -29,7 +29,9 @@ public enum ColumnType {
 	/**
 	 * 日期型
 	 */
-	DATE("date", "日期型", new String[] { "date", "time", "year", "datetime", "timestamp" });
+	DATE("date", "日期型", new String[] { "date", "time", "year", "datetime", "timestamp","timestamp without time zone" }),
+
+	Boolean("boolean", "布尔值", new String[] { "boolean" });
 	/**
 	 * key
 	 */

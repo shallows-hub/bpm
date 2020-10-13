@@ -19,7 +19,11 @@ public enum DbType {
     /**
      * SQLSERVER
      */
-    SQLSERVER("sqlserver", "sqlserver数据库", "com.microsoft.sqlserver.jdbc.SQLServerDriver", "jdbc:sqlserver://主机:1433;databaseName=数据库名");
+    SQLSERVER("sqlserver", "sqlserver数据库", "com.microsoft.sqlserver.jdbc.SQLServerDriver", "jdbc:sqlserver://主机:1433;databaseName=数据库名"),
+
+    /*postgre*/
+    POSTGRESQL("postgresql", "postgresql数据库", "org.postgresql.Driver", "jdbc:postgresql://主机:5432/数据库名");
+
     private String key;
     private String desc;
     private String driverClassName;

@@ -40,6 +40,9 @@ public class DbOperatorFactory {
         if (DbType.ORACLE.equalsWithKey(type)) {
             return new OracleDbOperator(jdbcTemplate);
         }
+        if (DbType.POSTGRESQL.equalsWithKey(type)) {
+            return new PostgreDbOperator(jdbcTemplate);
+        }
         LOG.warn("cannot get DbOperator ! DbType:{}",type);
         return null;
     }

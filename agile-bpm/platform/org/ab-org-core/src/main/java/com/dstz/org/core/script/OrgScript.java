@@ -6,6 +6,8 @@ import java.util.Set;
 
 import javax.annotation.Resource;
 
+import com.dstz.org.core.dao.UserDao;
+import com.dstz.org.core.model.User;
 import org.springframework.stereotype.Component;
 
 import com.dstz.base.api.exception.BusinessMessage;
@@ -35,6 +37,8 @@ public class OrgScript implements IScript {
 	GroupService groupService;
 	@Resource
 	UserService userService;
+	@Resource
+	UserDao userDao;
 
 	/**
 	 * <pre>
@@ -69,5 +73,14 @@ public class OrgScript implements IScript {
 		}
 
 		return identities;
+	}
+//	测试用
+	public Set<SysIdentity>getLevel3ByAccount(String account){
+		User user = userDao.getByAccount(account);
+		User level3User = userDao.get(user.getDepartmentLevel3Fzs());
+		Set<SysIdentity> identities = new HashSet<>();
+		SysIdentity identity = new DefaultIdentity(level3User.getUserId(), level3User.getFullname(), SysIdentity.TYPE_USER);
+		identities.add(identity);
+		return  identities;
 	}
 }

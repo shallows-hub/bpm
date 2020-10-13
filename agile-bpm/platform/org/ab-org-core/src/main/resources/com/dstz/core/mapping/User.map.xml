@@ -18,6 +18,10 @@
         <result property="createBy" column="create_by_" jdbcType="VARCHAR"/>
         <result property="updateTime" column="update_time_" jdbcType="TIMESTAMP"/>
         <result property="updateBy" column="update_by_" jdbcType="VARCHAR"/>
+		<result property="departmentLevel1Fzs" column="department_level1_fzs" jdbcType="VARCHAR"/>
+		<result property="departmentLevel2Fzs" column="department_level2_fzs" jdbcType="VARCHAR"/>
+		<result property="departmentLevel3Fzs" column="department_level3_fzs" jdbcType="VARCHAR"/>
+		<result property="departmentLevel4Fzs" column="department_level4_fzs" jdbcType="VARCHAR"/>
     </resultMap>
 
     <insert id="create" parameterType="com.dstz.org.core.model.User">

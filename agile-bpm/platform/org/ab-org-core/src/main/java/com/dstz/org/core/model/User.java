@@ -82,6 +82,7 @@ public class User extends BaseModel implements IUser{
     protected Integer status;
 
 
+
     /**
      * 组织ID，用于在组织下添加用户。
      */
@@ -304,5 +305,43 @@ public class User extends BaseModel implements IUser{
         result.put("status_", this.status);
         return result;
     }
- 
+
+//    部门经历等四个维度
+
+    public String getDepartmentLevel3Fzs() {
+        return departmentLevel3Fzs;
+    }
+
+    public void setDepartmentLevel3Fzs(String departmentLevel3Fzs) {
+        this.departmentLevel3Fzs = departmentLevel3Fzs;
+    }
+
+    protected String departmentLevel1Fzs;
+    protected String departmentLevel2Fzs;
+    protected String departmentLevel3Fzs;
+    protected String departmentLevel4Fzs;
+
+    public String getDepartmentLevel1Fzs() {
+        return departmentLevel1Fzs;
+    }
+
+    public void setDepartmentLevel1Fzs(String departmentLevel1Fzs) {
+        this.departmentLevel1Fzs = departmentLevel1Fzs;
+    }
+
+    public String getDepartmentLevel2Fzs() {
+        return departmentLevel2Fzs;
+    }
+
+    public void setDepartmentLevel2Fzs(String departmentLevel2Fzs) {
+        this.departmentLevel2Fzs = departmentLevel2Fzs;
+    }
+
+    public String getDepartmentLevel4Fzs() {
+        return departmentLevel4Fzs;
+    }
+
+    public void setDepartmentLevel4Fzs(String departmentLevel4Fzs) {
+        this.departmentLevel4Fzs = departmentLevel4Fzs;
+    }
 }
