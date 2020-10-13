@@ -1,15 +1,11 @@
 package com.dstz.base.dao.baseinterceptor;
 
+import cn.hutool.core.util.ArrayUtil;
 import com.dstz.base.api.context.ICurrentContext;
 import com.dstz.base.api.model.CreateInfoModel;
-import com.dstz.base.api.model.IBaseModel;
 import com.dstz.base.api.model.IDModel;
 import com.dstz.base.core.id.IdUtil;
 import com.dstz.base.core.model.BaseModel;
-import com.dstz.base.core.util.BeanUtils;
-
-import cn.hutool.core.util.ArrayUtil;
-
 import org.apache.commons.lang3.StringUtils;
 import org.apache.ibatis.executor.Executor;
 import org.apache.ibatis.mapping.MappedStatement;
@@ -18,8 +14,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.Date;
 import java.util.Properties;
-
-import javax.annotation.Resource;
 
 /**
  * 更新设置更新人
@@ -70,6 +64,7 @@ ICurrentContext currentContext;
 				CreateInfoModel model = (CreateInfoModel) param;
 	            if (model.getCreateTime() == null) {
 	                model.setCreateTime(new java.util.Date());
+//	                String dsa = currentContext.getCurrentUserId();
 	                model.setCreateBy(currentContext.getCurrentUserId());
 	            }
 	            if(model.getUpdateTime() == null){

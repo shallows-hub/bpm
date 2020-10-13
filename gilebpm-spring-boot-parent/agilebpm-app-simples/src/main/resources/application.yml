@@ -1,9 +1,9 @@
 spring:
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/angular?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=utf-8&allowMultiQueries=true&useSSL=false
+    url: jdbc:mysql://127.0.0.1:3306/angular?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=utf-8&allowMultiQueries=true&useSSL=false&allowPublicKeyRetrieval=true
     username: root
-    password: hj123321
+    password: fzs123321
     dbType: mysql
   activemq:
     broker-url: tcp://127.0.0.1:61616
@@ -11,7 +11,7 @@ spring:
     packages:
       trust-all: true
   redis:
-    host: 47.106.139.29
+    host: 127.0.0.1
     port: 6379
     password: agilebpm_redis_2019
     database: 9
@@ -32,7 +32,7 @@ ab:
   jwt:
     enabled: false
   security:
-    auth-ingores: /login.*,/agilebpm-ui*,/index.html,/swagger-*,/v2/api-docs*,
+    auth-ingores: /login.*,/agilebpm-ui*,/index.html,/swagger-*,/v2/api-docs*,/bpm/instance/*,/bpm/my/*,/bpm/definition/*,/bpm/task/*,
     csrf-ingores: a.feg.cn,127.0.0.1,localhost
   redis:
     use-redis-cache: false
