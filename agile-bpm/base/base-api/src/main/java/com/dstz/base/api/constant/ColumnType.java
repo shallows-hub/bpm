@@ -31,7 +31,7 @@ public enum ColumnType {
 	 */
 	DATE("date", "日期型", new String[] { "date", "time", "year", "datetime", "timestamp","timestamp without time zone" }),
 
-	Boolean("boolean", "布尔值", new String[] { "boolean" });
+	BOOLEAN("boolean", "布尔值", new String[] { "boolean" });
 	/**
 	 * key
 	 */

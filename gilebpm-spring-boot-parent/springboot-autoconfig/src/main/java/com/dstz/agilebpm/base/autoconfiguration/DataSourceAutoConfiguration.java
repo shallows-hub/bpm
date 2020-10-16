@@ -4,6 +4,7 @@ import com.alibaba.druid.pool.DruidDataSource;
 import com.dstz.base.dao.annotation.MapperAnnotation;
 import com.dstz.base.dao.baseinterceptor.QueryInterceptor;
 import com.dstz.base.dao.baseinterceptor.SaveInterceptor;
+import com.dstz.base.db.datasource.DbContextHolder;
 import com.dstz.base.db.datasource.DynamicDataSource;
 import com.github.pagehelper.PageInterceptor;
 import java.io.IOException;
@@ -61,12 +62,11 @@ public class DataSourceAutoConfiguration
         targetDataSources.put("dataSourceDefault", dataSourceDefault);
         targetDataSources.put("dataSource2", dataSource2);
         dynamicDataSource.setTargetDataSources(targetDataSources);
+        DbContextHolder.putDataSourceDbType("dataSource2","postgresql");
         dynamicDataSource.setDefaultDbtype(dataSourceExtraProperties.getDbType());
 //        dynamicDataSource.addDataSource("dataSource2", dataSource2);
         return dynamicDataSource;
     }
-
-
 
     @Bean(name = { "jdbcTemplate" })
     public JdbcTemplate jdbcTemplate(@Qualifier("dataSource") final DataSource dataSource) {

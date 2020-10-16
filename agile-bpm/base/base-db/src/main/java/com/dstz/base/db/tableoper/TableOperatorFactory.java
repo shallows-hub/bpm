@@ -32,6 +32,10 @@ public class TableOperatorFactory {
 		if (DbType.ORACLE.equalsWithKey(type)) {
 			return new OracleTableOperator(table, jdbcTemplate);
 		}
+		if (DbType.POSTGRESQL.equalsWithKey(type)) {
+			return new PostgreTableOperator(table, jdbcTemplate);
+		}
+
 		throw new RuntimeException("找不到类型[" + type + "]的数据库处理者(TableOperator)");
 	}
 	

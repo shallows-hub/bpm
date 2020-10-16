@@ -91,7 +91,7 @@ public class PostgreDbOperator extends DbOperator {
                 "col.numeric_precision,\n" +
                 "col.numeric_scale,\n" +
                 "col.is_nullable,\n" +
-                "col.column_default,\n" +
+                "NULL as column_default,\n" +
                 "des.description\n" +
                 "from\n" +
                 "information_schema.columns col left join pg_description des on\n" +
@@ -106,8 +106,9 @@ public class PostgreDbOperator extends DbOperator {
             Column column = new Column();
             column.setComment(getOrDefault(map, "description", "").toString());
             column.setDefaultValue(map.get("column_default") == null ? null : map.get("column_default").toString());
+//            column.setDefaultValue(null);
             column.setName(getOrDefault(map, "column_name", "").toString());
-            column.setPrimary("PRI".equals(getOrDefault(map, "COLUMN_KEY", "")));
+            column.setPrimary("id".equals(getOrDefault(map, "column_name", "")));
             column.setRequired("NO".equals(getOrDefault(map, "is_nullable", "")));
             column.setType(ColumnType.getByDbDataType(map.get("data_type").toString(),"字段["+column.getComment()+"("+column.getName()+")]").getKey());
             if (ColumnType.VARCHAR.equalsWithKey(column.getType())) {
