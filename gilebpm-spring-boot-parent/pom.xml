@@ -15,6 +15,8 @@
 		<!--  案例 前端代码 -->
 		<module>demo-project-ui</module>
 		<module>springboot-autoconfig</module>
+        <module>wf-modify</module>
+        <!--<module>modify-wf</module>-->
 
 		<!--		<module>springboot-autoconfig</module>-->
 	</modules>
@@ -91,6 +93,12 @@
 			</dependency>
 			<dependency>
 				<groupId>com.dstz.agilebpm</groupId>
+				<artifactId>wf-core</artifactId>
+				<classifier>pg</classifier>
+				<version>${ab.wf.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.dstz.agilebpm</groupId>
 				<artifactId>wf-plugin-biz</artifactId>
 				<version>${ab.wf.version}</version>
 			</dependency>
@@ -138,6 +146,11 @@
 				<groupId>com.dstz</groupId>
 				<artifactId>agilebpm-wf-starter</artifactId>
 				<version>${ab.staters.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-boot-start-web</artifactId>
+				<version>5.2.8.RELEASE</version>
 			</dependency>
 		</dependencies>
 	</dependencyManagement>

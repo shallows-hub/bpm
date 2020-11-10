@@ -13,7 +13,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import java.util.*;
 
 /**
- * Description 不支持在pg里操作表
+ * Description 不支持在pg里操作表,为了避免修改实际数据，只修改保留查询语句，其他作空处理
  * author hj
  * date 2020/10/13-10:07
  */
@@ -37,96 +37,40 @@ public class PostgreTableOperator extends TableOperator {
     public void deleteData(Object id) { }
     public void deleteData(Map<String, Object> param) { }
     public void updateData(Map<String, Object> data) { }
-//    public Map<String, Object> selectData(List<String> columnName, Object id) {
-//        Map<String, Object> param = new HashMap<>();
-//        param.put(table.getPkColumn().getName(), id);
-//        List<Map<String, Object>> list = selectData(columnName, param);
-//        if (!list.isEmpty()) {
-//            return list.get(0);
-//        }
-//        return null;
-//    }
-//
-    public Map<String, Object> selectData(Object id) {
-        Map<String, Object> param = new HashMap<>();
-        param.put("id",0);
-        return param;
-//        param.put(table.getPkColumn().getName(), id);
-//        List<Map<String, Object>> list = selectData(param);
-//        if (!list.isEmpty()) {
-//            return list.get(0);
-//        }
-//        return null;
+
+//    注意函数里将string类型的 id 转为 int类型了
+    public List<Map<String, Object>> selectData(List<String> columnName, Map<String, Object> param) {
+        StringBuilder sql = new StringBuilder();
+        if (CollectionUtil.isEmpty(columnName)) {
+            sql.append("SELECT * FROM " + table.getName());
+        } else {
+            sql.append("SELECT");
+            for (String cn : columnName) {
+                if (!sql.toString().endsWith("SELECT")) {
+                    sql.append(",");
+                }
+                sql.append(" " + cn);
+            }
+            sql.append(" FROM " + table.getName());
+        }
+
+        sql.append(" WHERE ");
+
+        List<Object> paramList = new ArrayList<>();// 参数
+        for (Map.Entry<String, Object> entry : param.entrySet()) {
+            if (sql.toString().endsWith("?")) {
+                sql.append(" and ");
+            }
+
+            if (entry.getKey().equals("id")){
+                Object value = entry.getValue();
+                String StringValue = (String)value;
+                Object IntValue = Integer.valueOf(StringValue);
+                entry.setValue(IntValue);
+            }
+            sql.append(entry.getKey() + " = ?");
+            paramList.add(entry.getValue());
+        }
+        return jdbcTemplate.queryForList(sql.toString(), paramList.toArray());
     }
-//
-//    public List<Map<String, Object>> selectData(Map<String, Object> param) {
-//        return selectData(null, param);
-//    }
-//
-//    public List<Map<String, Object>> selectData(List<String> columnName, Map<String, Object> param) {
-//        StringBuilder sql = new StringBuilder();
-//        if (CollectionUtil.isEmpty(columnName)) {
-//            sql.append("SELECT * FROM " + table.getName());
-//        } else {
-//            sql.append("SELECT");
-//            for (String cn : columnName) {
-//                if (!sql.toString().endsWith("SELECT")) {
-//                    sql.append(",");
-//                }
-//                sql.append(" " + cn);
-//            }
-//            sql.append(" FROM " + table.getName());
-//        }
-//
-//        sql.append(" WHERE id = 0");
-
-//        List<Object> paramList = new ArrayList<>();// 参数
-//        for (Map.Entry<String, Object> entry : param.entrySet()) {
-//            if (sql.toString().endsWith("?")) {
-//                sql.append(" and ");
-//            }
-//            sql.append(entry.getKey() + " = ?");
-//            paramList.add(entry.getValue());
-//        }
-
-//        return jdbcTemplate.queryForList(sql.toString());
-//    }
-
-//    public void syncColumn() {
-//        // 未生成表，不处理
-//        if (!isTableCreated()) {
-//            return;
-//        }
-//        Set<String> dbColumnNames = new HashSet<>();// 数据库中存在的字段名
-//        Table<Column> dbTable = getDbTable();
-//        for (Column c : dbTable.getColumns()) {
-//            dbColumnNames.add(c.getName());
-//        }
-//
-//        for (String columnName : dbColumnNames) {
-//            if (this.table.getColumn(columnName) == null) {// 数据库表内有，但是结构没有，删除
-//                dropColumn(columnName);
-//            }
-//        }
-//
-//        for (Column column : table.getColumns()) {
-//            boolean exits = false;
-//            for (String columnName : dbColumnNames) {
-//                if (columnName.equalsIgnoreCase(column.getName())) {
-//                    exits = true;
-//                    break;
-//                }
-//            }
-//            if (!exits) {// 结构有，数据库表内没有，增加
-//                addColumn(column);
-//            } else if (!dbTable.getColumn(column.getName()).equals(column)) {
-//                updateColumn(column);// 更新一遍结构
-//            }
-//        }
-//    }
-//
-//    public Table<Column> getDbTable() {
-//        DbOperator dbOperator = DbOperatorFactory.newOperator(type(), jdbcTemplate);
-//        return dbOperator.getTable(table.getName());
-//    }
 }

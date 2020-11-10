@@ -162,7 +162,4 @@ public class Column implements Serializable {
 		return true;
 	}
 
-	public static void main(String[] args) {
-		System.out.println(EnumUtil.toJSON("com.dstz.base.db.model.Column$TYPE"));
-	}
 }

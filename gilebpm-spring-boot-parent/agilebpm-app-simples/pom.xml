@@ -34,7 +34,11 @@
                 </exclusion>
             </exclusions>
         </dependency>
-
+        <dependency>
+            <groupId>com.dstz</groupId>
+            <artifactId>wf-modify</artifactId>
+            <version>1.2.3</version>
+        </dependency>
         <dependency>
             <groupId>com.dstz</groupId>
             <artifactId>springboot-autoconfig</artifactId>
