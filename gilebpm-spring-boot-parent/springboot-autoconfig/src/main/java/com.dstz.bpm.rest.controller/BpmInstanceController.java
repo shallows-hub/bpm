@@ -25,6 +25,7 @@ import com.dstz.bpm.core.model.BpmDefinition;
 import com.dstz.bpm.core.model.BpmInstance;
 import com.dstz.bpm.core.model.BpmTaskOpinion;
 import com.dstz.bpm.engine.action.cmd.DefaultInstanceActionCmd;
+import com.dstz.bpm.service.DefaultInstHistImgService;
 import com.dstz.form.api.model.FormType;
 import com.dstz.sys.util.ContextUtil;
 import com.github.pagehelper.Page;
@@ -38,6 +39,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 import java.util.Map;
+
 @RestController
 @RequestMapping({"/bpm/instance"})
 @Api(
@@ -56,6 +58,8 @@ public class BpmInstanceController extends ControllerTools {
     BpmDefinitionManager bpmDefinitionMananger;
     @Resource
     ActInstanceService actInstanceService;
+    @Resource
+    DefaultInstHistImgService defaultInstHistImgService;
 
     public BpmInstanceController() {
     }
@@ -97,7 +101,7 @@ public class BpmInstanceController extends ControllerTools {
     )})
     public PageResult<BpmInstance> listJson(HttpServletRequest request, HttpServletResponse reponse) throws Exception {
         QueryFilter queryFilter = this.getQueryFilter(request);
-        Page<BpmInstance> bpmInstanceList = (Page)this.bpmInstanceManager.query(queryFilter);
+        Page<BpmInstance> bpmInstanceList = (Page) this.bpmInstanceManager.query(queryFilter);
         return new PageResult(bpmInstanceList);
     }
 
@@ -143,7 +147,7 @@ public class BpmInstanceController extends ControllerTools {
             return new PageResult();
         } else {
             queryFilter.addFilter("create_org_id_", ContextUtil.getCurrentGroupId(), QueryOP.EQUAL);
-            Page<BpmInstance> bpmInstanceList = (Page)this.bpmInstanceManager.query(queryFilter);
+            Page<BpmInstance> bpmInstanceList = (Page) this.bpmInstanceManager.query(queryFilter);
             return new PageResult(bpmInstanceList);
         }
     }
@@ -160,7 +164,7 @@ public class BpmInstanceController extends ControllerTools {
     public ResultMsg<IBpmInstance> getBpmInstance(@RequestParam @ApiParam("ID") String id) throws Exception {
         IBpmInstance bpmInstance = null;
         if (StringUtil.isNotEmpty(id)) {
-            bpmInstance = (IBpmInstance)this.bpmInstanceManager.get(id);
+            bpmInstance = (IBpmInstance) this.bpmInstanceManager.get(id);
         }
 
         return this.getSuccessResult(bpmInstance);
@@ -268,23 +272,47 @@ public class BpmInstanceController extends ControllerTools {
             value = "获取流程图流文件",
             notes = "获取流程实例的流程图，以流的形式返回png图片"
     )
-    public void flowImage(@RequestParam(required = false) @ApiParam("流程实例ID") String instId, @RequestParam(required = false) @ApiParam("流程定义ID，流程未启动时使用") String defId, HttpServletResponse response,HttpServletRequest request) throws Exception {
+    public void flowImage(@RequestParam(required = false) @ApiParam("流程实例ID") String instId, @RequestParam(required = false) @ApiParam("流程定义ID，流程未启动时使用") String defId, HttpServletResponse response, HttpServletRequest request) throws Exception {
 //        Authentication auth = SecurityUtil.login(request, "hj", "", true);
 //        SecurityContextHolder.setContext(SecurityContextHolder.createEmptyContext());
 //        SecurityContextHolder.getContext().setAuthentication(auth);
         String actInstId = null;
         String actDefId;
         if (StringUtil.isNotEmpty(instId)) {
-            BpmInstance inst = (BpmInstance)this.bpmInstanceManager.get(instId);
+            BpmInstance inst = (BpmInstance) this.bpmInstanceManager.get(instId);
             actInstId = inst.getActInstId();
             actDefId = inst.getActDefId();
         } else {
-            BpmDefinition def = (BpmDefinition)this.bpmDefinitionMananger.get(defId);
+            BpmDefinition def = (BpmDefinition) this.bpmDefinitionMananger.get(defId);
             actDefId = def.getActDefId();
         }
 
         response.setContentType("image/png");
         IOUtils.copy(this.bpmImageService.draw(actDefId, actInstId), response.getOutputStream());
+    }
+
+    @RequestMapping(
+            value = {"flowListJson"},
+            method = {RequestMethod.GET}
+    )
+    @ApiOperation(
+            value = "获取流程节点",
+            notes = "获取流程实例的流程节点和用户"
+    )
+    public ResultMsg<JSONObject> flowListJson(@RequestParam(required = false) @ApiParam("流程实例ID") String instId, @RequestParam(required = false) @ApiParam("流程定义ID，流程未启动时使用") String defId, HttpServletResponse response, HttpServletRequest request) throws Exception {
+        String actInstId = null;
+        String actDefId;
+        if (StringUtil.isNotEmpty(instId)) {
+            BpmInstance inst = (BpmInstance) this.bpmInstanceManager.get(instId);
+            actDefId = inst.getActDefId();
+            actInstId = inst.getActInstId();
+        } else {
+            BpmDefinition def = (BpmDefinition) this.bpmDefinitionMananger.get(defId);
+            actDefId = def.getActDefId();
+        }
+        List<BpmTaskOpinion> taskOpinion = this.bpmTaskOpinionManager.getByInstId(instId);
+        JSONObject infos = this.defaultInstHistImgService.getFlowInfoToListJsonObject(actDefId,actInstId,taskOpinion);
+        return this.getSuccessResult(infos, "获取流程成功");
     }
 
     @RequestMapping(
@@ -304,7 +332,7 @@ public class BpmInstanceController extends ControllerTools {
     @RequestMapping({"startTest"})
     @CatchErr
     public ResultMsg<String> startTest() throws Exception {
-        this.actInstanceService.startProcessInstance("tset:1:410210125441138689", "test", (Map)null);
+        this.actInstanceService.startProcessInstance("tset:1:410210125441138689", "test", (Map) null);
         return this.getSuccessResult("成功");
     }
 
@@ -330,7 +358,7 @@ public class BpmInstanceController extends ControllerTools {
     )
     public ResultMsg<JSONObject> getInstanceAndChildren(@RequestParam @ApiParam("ID") String id) throws Exception {
         JSONObject json = new JSONObject();
-        IBpmInstance bpmInstance = (IBpmInstance)this.bpmInstanceManager.get(id);
+        IBpmInstance bpmInstance = (IBpmInstance) this.bpmInstanceManager.get(id);
         json.put("bpmInstance", bpmInstance);
         List<BpmInstance> instanceList = this.bpmInstanceManager.getByParentId(id);
         json.put("bpmInstanceChildren", instanceList);
