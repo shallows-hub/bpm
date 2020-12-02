@@ -113,8 +113,8 @@ public class DefaultInstHistImgService implements BpmImageService {
         JSONObject flowInfos = new JSONObject();
 //        start=发起流程；awaiting_check=待审批；agree=同意；against=反对；return=驳回；abandon=弃权；retrieve=追回
         BpmnModel bpmnModel = this.repositoryService.getBpmnModel(actDefId);
-        BpmInstance instance = this.f.getByActInstId(actInstId);
-        List<BpmTaskStack> stacks = this.k.getByInstanceId(instance.getId());
+//        BpmInstance instance = this.f.getByActInstId(actInstId);
+//        List<BpmTaskStack> stacks = this.k.getByInstanceId(instance.getId());
         List<FlowNode> flowNodes = gatherAllFlowNodes(bpmnModel);
         for (FlowNode flowNode : flowNodes) {
             JSONObject flowJson = new JSONObject();
